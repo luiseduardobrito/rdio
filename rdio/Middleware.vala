@@ -35,6 +35,8 @@ public class Rdio.Middleware : GLib.Object {
 	public int shuffle = 0;
 	public int repeat = 0;
 
+	public double zoom = 0.0;
+
 	public signal void played ();
 	public signal void paused ();
 	public signal void changed ();
@@ -48,6 +50,10 @@ public class Rdio.Middleware : GLib.Object {
 	string REPEAT_JS = "R.Services.Player.setRepeat(%d);";
 	string SHUFFLE_JS = "R.Services.Player.setShuffle(%d);";
 	string SEEK_JS = "R.Services.Player.seek (%d);";
+
+	string ZOOM_JS = "document.body.style.zoom = %f;";
+	string ZOOM_IN_JS = """document.style.zoom += %f""";
+	string ZOOM_OUT_JS = """document.style.zoom -= %f""";
 
 	string JS = """
 		var playingTrack = R.Services.Player.model.get('playingTrack').attributes; 
@@ -63,6 +69,8 @@ public class Rdio.Middleware : GLib.Object {
 		var repeat = playerAttributes.repeat;
 		var volume = playerAttributes.volume;
 		var position = playerAttributes.position;
+
+		var zoom = document.body.style.zoom;
 
 		var notifications_count = R.currentUser.attributes.rdioUnreadNotificationsCount;
 
@@ -158,6 +166,18 @@ public class Rdio.Middleware : GLib.Object {
 		webview.execute_script (SEEK_JS.printf (position));
 	}
 
+	public void set_zoom (double val) {
+		webview.execute_script (ZOOM_JS.printf (val));
+	}
+
+	public void zoom_in () {
+		webview.execute_script (ZOOM_IN_JS.printf (10));
+	}
+
+	public void zoom_out () {
+		webview.execute_script (ZOOM_OUT_JS.printf (10));
+	}
+
 	/** This is how the javascript communicates with vala.
 	 * JS sends alert() messages containing JSON data which
 	 * we can then intercept here
@@ -179,6 +199,7 @@ public class Rdio.Middleware : GLib.Object {
 			var position = (int) root.get_int_member ("position");
 			var volume = (double)root.get_double_member ("volume");
 			var notifications_count = (int) root.get_int_member("notifications_count");
+			var zoom = root.get_string_member("zoom");
 
 			// Find out if anything changed and send appropiate signals
 			if (this.title != title || this.album != album || this.artist != artist) {

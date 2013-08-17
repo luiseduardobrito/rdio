@@ -1,0 +1,3 @@
+/home/luiseduardo14/Projects/rdio/build/po/CMakeFiles/i18n.dir
+/home/luiseduardo14/Projects/rdio/build/po/CMakeFiles/pot.dir
+/home/luiseduardo14/Projects/rdio/build/rdio/CMakeFiles/rdio.dir

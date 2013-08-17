@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+0120cfea5caff87392880af305d9b4dd po/CMakeFiles/i18n
+0120cfea5caff87392880af305d9b4dd po/CMakeFiles/pot
+4b050423e6cdc5acf110aea68f508e58 rdio/config.c

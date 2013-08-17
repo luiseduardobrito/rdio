@@ -11,17 +11,19 @@ vala_precompile(VALA_C
     Middleware.vala
     CustomTitleBar.vala
     OverlayLabel.vala
+    KeybindingManager.vala
     MediaKeyListener.vala
     MPRIS.vala
     SoundMenuIntegration.vala
     UnityIntegration.vala
-    Notifier.vala
-    
+    Notifier.vala   
     Utils/Networking.vala
     
 PACKAGES
     glib-2.0
     gtk+-3.0
+    x11
+    gdk-x11-3.0
     gio-2.0
     libsoup-2.4
     json-glib-1.0

@@ -25,6 +25,7 @@ public class Rdio.App : Gtk.Application {
 	public static Rdio.Window window { get; private set; }
 	public static Rdio.Middleware middleware { get; private set; }
 	public static Rdio.Settings settings { get; private set; }
+	public static Rdio.KeybindingManager kbm { get; private set; }
 	public static Rdio.MediaKeyListener mkl { get; private set; }
 
 	#if HAVE_UNITY
@@ -55,6 +56,12 @@ public class Rdio.App : Gtk.Application {
 		settings = new Rdio.Settings ();
 		window = new Rdio.Window (this);
 		middleware = new Rdio.Middleware (window.webview);
+
+		kbm = new KeybindingManager();
+		kbm.bind("<Ctrl>Z", App.middleware.zoom_in);
+		kbm.bind("<Ctrl>+", App.middleware.zoom_in);
+		kbm.bind("<Ctrl>-", App.middleware.zoom_out);
+
 		mkl = new MediaKeyListener ();
 
 		debug("Initializing MPRIS 2.0\n");

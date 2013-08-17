@@ -11,6 +11,8 @@ pkg_check_modules(DEPS
     REQUIRED
     glib-2.0
     gtk+-3.0
+    x11
+    gdk-x11-3.0
     gio-2.0
     libsoup-2.4
     json-glib-1.0
